@@ -6,8 +6,27 @@ defmodule Mix.Tasks.Step0Repl do
   end
 
   def loop do
-    IO.write("user>")
-    rep IO.read(:stdio, :line)
+    IO.write("user> ")
+    IO.read(:stdio, :line)
+      |> read_eval_print
+      |> IO.write
+
+    loop()
+  end
+
+
+  def read(input) do
+    input
+  end
+
+
+  def eval(input) do
+    input
+  end
+
+
+  def print(input) do 
+    input
   end
 
 
@@ -15,13 +34,10 @@ defmodule Mix.Tasks.Step0Repl do
     System.halt()
   end
 
-  def rep(line) do
+  def read_eval_print(line) do
     read line
     |> eval
     |> print
   end
-
-  def read(input), do: input
-  def eval(input), do: input
-  def print(output), do: IO.puts output
+  
 end
